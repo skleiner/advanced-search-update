@@ -6,7 +6,7 @@
   http://www.oscommerce.com
 
   Copyright (c) 2010 osCommerce
-
+  wdepots modification to allow search by category and/or manufacturer
   Released under the GNU General Public License
 */
 
@@ -32,8 +32,10 @@ function check_form() {
   var pto = document.advanced_search.pto.value;
   var pfrom_float;
   var pto_float;
-
-  if ( ((keywords == '') || (keywords.length < 1)) && ((dfrom == '') || (dfrom.length < 1)) && ((dto == '') || (dto.length < 1)) && ((pfrom == '') || (pfrom.length < 1)) && ((pto == '') || (pto.length < 1)) ) {
+  var cat_id = document.advanced_search.categories_id.value;
+  var mfg_id = document.advanced_search.manufacturers_id.value;
+  
+  if ( ((keywords == '') || (keywords.length < 1)) && ((dfrom == '') || (dfrom.length < 1)) && ((dto == '') || (dto.length < 1)) && ((pfrom == '') || (pfrom.length < 1)) && ((pto == '') || (pto.length < 1)) && (cat_id == '') && (mfg_id == '')) {
     error_message = error_message + "* <?php echo ERROR_AT_LEAST_ONE_INPUT; ?>\n";
     error_field = document.advanced_search.keywords;
     error_found = true;

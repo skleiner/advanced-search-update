@@ -6,7 +6,7 @@
   http://www.oscommerce.com
 
   Copyright (c) 2010 osCommerce
-
+  wdepots modification to allow search by category and/or manufacturer
   Released under the GNU General Public License
 */
 
@@ -20,9 +20,10 @@
        (isset($HTTP_GET_VARS['dfrom']) && (empty($HTTP_GET_VARS['dfrom']) || ($HTTP_GET_VARS['dfrom'] == DOB_FORMAT_STRING))) &&
        (isset($HTTP_GET_VARS['dto']) && (empty($HTTP_GET_VARS['dto']) || ($HTTP_GET_VARS['dto'] == DOB_FORMAT_STRING))) &&
        (isset($HTTP_GET_VARS['pfrom']) && !is_numeric($HTTP_GET_VARS['pfrom'])) &&
-       (isset($HTTP_GET_VARS['pto']) && !is_numeric($HTTP_GET_VARS['pto'])) ) {
+       (isset($HTTP_GET_VARS['pto']) && !is_numeric($HTTP_GET_VARS['pto'])) &&
+           (isset($HTTP_GET_VARS['manufacturers_id']) && !is_numeric($HTTP_GET_VARS['manufacturers_id'])) &&
+           (isset($HTTP_GET_VARS['categories_id']) && !is_numeric($HTTP_GET_VARS['categories_id']))) {
     $error = true;
-
     $messageStack->add_session('search', ERROR_AT_LEAST_ONE_INPUT);
   } else {
     $dfrom = '';
@@ -114,9 +115,8 @@
     }
   }
 
-  if (empty($dfrom) && empty($dto) && empty($pfrom) && empty($pto) && empty($keywords)) {
+  if (empty($dfrom) && empty($dto) && empty($pfrom) && empty($pto) && empty($keywords) && empty($HTTP_GET_VARS['manufacturers_id']) && empty($HTTP_GET_VARS['categories_id'])) {
     $error = true;
-
     $messageStack->add_session('search', ERROR_AT_LEAST_ONE_INPUT);
   }
 
